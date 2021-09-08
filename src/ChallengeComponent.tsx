@@ -14,13 +14,13 @@ export function ChallengeComponent() {
     setTasks({...taskList, ...{todo:taskList.todo }});
   };
 
-  const handleOnTodo = (movement) =>{
+  const handleOnTodo = (movement: any) =>{
     taskList.todo.splice(movement.idx, 1);
     taskList.inProgress.push(movement.title);
     setTasks({...taskList, ...{todo:taskList.todo, inProgress: taskList.inProgress }});
   };
 
-  const handleOnInProgress = (movement) =>{
+  const handleOnInProgress = (movement : any) =>{
 
     taskList.inProgress.splice(movement.idx, 1);
    if(movement.move === "right"){
@@ -31,7 +31,7 @@ export function ChallengeComponent() {
     setTasks({...taskList, ...{todo:taskList.todo, inProgress: taskList.inProgress }});
    }
   };
-  const handleOnDone = (movement) =>{
+  const handleOnDone = (movement: any) =>{
     taskList.done.splice(movement.idx, 1);
     taskList.inProgress.push(movement.title);
     setTasks({...taskList, ...{inProgress:taskList.inProgress, done: taskList.done }});
@@ -46,16 +46,20 @@ export function ChallengeComponent() {
           tasks={taskList.todo} 
           endLeft
           onMove={handleOnTodo}
+          endRight={false}
         />
         <CardStatus 
           title="In Progress" 
           tasks={taskList.inProgress}
           onMove={handleOnInProgress}
+          endLeft={false}
+          endRight={false}
         />
         <CardStatus 
           title="Done"  
           tasks={taskList.done} 
           endRight
+          endLeft={false}
           onMove={handleOnDone}
         />
       </div>
